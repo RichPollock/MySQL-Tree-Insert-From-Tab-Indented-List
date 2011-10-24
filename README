@@ -1,0 +1,29 @@
+This is a PHP script to generate a MySQL INSERT statement to store hierarchical data using the nested set model (as described here:
+http://ftp.ntu.edu.tw/MySQL/tech-resources/articles/hierarchical-data.html).
+
+The input file should be in the format of a tab-indented list, as follows:
+
+Food
+	Fruit
+		Green
+			Apples
+			Grapes
+		Orange
+			Oranges
+		Red
+			Cherries
+			Lychees
+			Tomatoes
+	Vegetables
+		Green
+			Courgettes
+			Cucumbers
+		Orange
+			Carrots
+		Red
+			Bell peppers
+			
+The output will be in the form of a standard SQL multiple INSERT statement, as follows:
+
+INSERT INTO `table_name` (parent, title, lft, rgt) VALUES (('','Food',1,38), ('Food','Fruit',2,21), ('Fruit','Green',3,8), ('Green','Apples',4,5), ('Green','Grapes',6,7), ('Fruit','Orange',9,12), ('Orange','Oranges',10,11), ('Fruit','Red',13,20), ('Red','Cherries',14,15), ('Red','Lychees',16,17), ('Red','Tomatoes',18,19), ('Food','Vegetables',22,37), ('Vegetables','Green',23,28), ('Green','Courgettes',24,25), ('Green','Cucumbers',26,27), ('Vegetables','Orange',29,32), ('Orange','Carrots',30,31), ('Vegetables','Red',33,36), ('Red','Bell peppers',34,35)
+			
